@@ -5,7 +5,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./artifacts:/docker-entrypoint-initdb.d
+      - ./artifacts/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_DATABASE=base
