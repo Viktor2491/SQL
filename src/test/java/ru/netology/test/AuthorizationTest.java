@@ -14,7 +14,7 @@ public class AuthorizationTest {
 
     @BeforeAll
     static void setUpAll() {
-        Configuration.headless = false;
+        Configuration.headless = true;
     }
 
     @BeforeEach
@@ -53,6 +53,12 @@ public class AuthorizationTest {
     }
 
     @Test
+    @DisplayName("Ошибка, неверный пароль")
+    void shouldReturnFailWithInvalidPassword() {
+        new LoginPage().invalidPassword(getInvalidAuthInfo());
+    }
+
+    @Test
     @DisplayName("Ошибка, пустое поле логина")
     void shouldReturnFailWithEmptyLogin() {
         new LoginPage().emptyLoginOrPass(getEmptyLogin());
@@ -86,9 +92,6 @@ public class AuthorizationTest {
     @Test
     @DisplayName("Блокировка, введен неверный пароль 3 раза")
     void shouldReturnFailAfterTripleEntry() {
-        new LoginPage().validLogin(getInvalidPassFirstAuthInfo());
-        new LoginPage().validLogin(getInvalidPassFirstAuthInfo());
-        new LoginPage().validLogin(getInvalidPassFirstAuthInfo());
-        new LoginPage().invalidLogin(getFirstAuthInfo());
+        new LoginPage().invalidPasswordTripleEntry(getInvalidPassFirstAuthInfo());
     }
 }

@@ -32,7 +32,15 @@ public class LoginPage {
         login.setValue(info.getLogin());
         pass.setValue(info.getPassword());
         button.click();
-        errorNotification.shouldBe(visible);
+        errorNotification.shouldBe(visible).shouldHave(text("Ошибка! " + "Неверно указан логин или пароль"));
+    }
+
+    public void invalidPassword(DataHelper.AuthInfo info) {
+        clearInput();
+        login.setValue(info.getLogin());
+        pass.setValue(info.getPassword());
+        button.click();
+        errorNotification.shouldBe(visible).shouldHave(text("Ошибка! " + "Неверно указан логин или пароль"));
     }
 
     public void emptyLoginOrPass(DataHelper.AuthInfo info) {
@@ -45,6 +53,19 @@ public class LoginPage {
         }
         if (Objects.requireNonNull(pass.getValue()).isEmpty()) {
             errorEmptyPass.shouldBe(visible).shouldHave(text("Поле обязательно для заполнения"));
+        }
+    }
+
+    public void invalidPasswordTripleEntry(DataHelper.AuthInfo info) {
+        for (int i = 0; i < 3; i++) {
+            invalidPassword(info);
+            if (i < 2) {
+                errorNotification.getText().equals("Ошибка! " +
+                        "Неверно указан логин или пароль");
+            } else {
+                errorNotification.getText().equals("Ошибка! " +
+                        "Превышено количество попыток входа. Пользователь заблокирован");
+            }
         }
     }
 

@@ -15,11 +15,14 @@ public class DataHelper {
         String password;
     }
 
+
     public static AuthInfo getFirstAuthInfo() {
-        return new AuthInfo("vasya", "qwerty123");
+
+         return new AuthInfo("vasya", "qwerty123");
     }
 
     public static AuthInfo getSecondAuthInfo() {
+
         return new AuthInfo("petya", "123qwerty");
     }
 
@@ -28,10 +31,12 @@ public class DataHelper {
     }
 
     public static AuthInfo getInvalidPassFirstAuthInfo() {
+
         return new AuthInfo("vasya", faker.internet().password());
     }
 
     public static AuthInfo getEmptyAuthInfo() {
+
         return new AuthInfo("", "");
     }
 
@@ -44,6 +49,7 @@ public class DataHelper {
     }
 
     public static String getInvalidCode() {
+
         return faker.code().gtin13();
     }
 }
