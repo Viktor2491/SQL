@@ -91,7 +91,7 @@ public class AuthorizationTest {
 
     @Test
     @DisplayName("Блокировка, введен неверный пароль 3 раза")
-    void shouldReturnFailAfterTripleEntry() {
+    void shouldBlockAfterTripleEntry() {
         new LoginPage().invalidPasswordTripleEntry(getInvalidPassFirstAuthInfo());
     }
 }
